@@ -3,7 +3,7 @@ _version intensive, janvier 2019_
 
   * Laure Gonnord (LG), Université Lyon 1, LIP [email](mailto:laure.gonnord@ens-lyon.fr)
   * Version: 2018.12.19
-  * [Page web (slides, annales)](http://laure.gonnord.org/pro/compilM1.html)
+  * [Page web (slides, annales)](http://laure.gonnord.org/pro/teaching/compilM1.html)
 
 ## Première semaine
 
@@ -12,28 +12,85 @@ _version intensive, janvier 2019_
  
   - Jeudi 10/01
      - :book: Cours, 8h00 -> 9h30: [cours2](lien cours 1) (LG)
-	 - :hammer: TD, 16h00 -> 17h30 [TD1 archi/lex](lien td1) (LG, SB,
+	 - :hammer: TD, 16h00 -> 17h30 [TD1 archi/lex](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
        MM, NL)
    
   - Vendredi 11/01
-	 - :hammer: TP, 8h00 -> 10h00 [TP1 python](lien tp1) (tous)
+	 - :hammer: TP, 8h00 -> 10h00 [TP1 python/archi](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
 
 ## Deuxième semaine
 
+  - Lundi 14/01
+	- :mag_right: Contrôle continu (papier), 8h00 -> 8h20 archi (seul document
+      autorisé: ISA de la machine) (LG)
+    - :book: Cours, 8h30 -> 10h00:  [cours2](lien cours 2) (LG)
+    - :hammer: TP, 14h00 -> 16h00: [TP2 antlr](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
+  
+  - Mardi 15/01
+	- :book: Cours, 8h00 -> 9h30:  [cours2](lien cours 2) (LG)
+    - :hammer: TD, 10h00 -> 11h30: [TD2 grammaires](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+      MM, NL) 
+	- :hammer: TP libre après 16h
+	
+  - Mercredi 16/01
+	- :mag_right: Contrôle continu (tp), 14h00 -> 14h30 une grammaire
+      ANTLR (tous)
+    - :hammer: TP, 15h -> 18h00: [TP3 frontend, évaluateur](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
+
+  - Jeudi 17/01
+  	- :book: Cours, 10h00 -> 12h00:  [cours3](lien cours 3) (LG)
+	- :hammer: TP libre après 16h
+	
+  - Vendredi 18/01
+    - :hammer: TD, 14h00 -> 15h30: [TD3 génération de code](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+      MM, NL) 
+    - :hammer: TP, 16h -> 18h00: [TP4 démo, début codegen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
+    
 
 ## Troisième semaine
 
-  - Vendredi 
-	- :mag_right: Examen final (2h). Voir les annales sur la page du
-      cours.
+  - Lundi 21/01
+    - :hammer: TD, 14h00 -> 15h30: [TD4 liveness](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+      MM, NL) 
+	- :hammer: TP libre après 16h
+	
+  - Mardi 22/01
+	- :hammer: TD, 14h00 -> 15h30: [TD5 regalloc](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+      MM, NL) 
+	- :hammer: TP, 14h00 -> 16h00:  [TP code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
+
+  - Mercredi 23/01
+	- :hammer: TP libre le matin
+- 	- :hammer: TP, 14h00 -> 17h00:  [TP code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
+
+  - Jeudi 24/01
+	- Libre pour TP/Révisions
+
+  - Vendredi 25/11
+	- :mag_right: Examen final 14h00 -> 16h00 (2h). Voir les annales sur la [page du
+      cours](http://laure.gonnord.org/pro/teaching/compilM1.html).
 
 
 ### Rendus Tomuss et feedback
 
-  - Test
+  - CC de cours : la note arrivera le mardi 15/01 soir.
+  
+  - CC de tp noté : rendu mercredi 16/01 à 14h30. La correction
+    arrivera avant la fin de la semaine.
 
-## Pondération des notes
+  - Rendu de l'évaluateur juste après la démo le vendredi 18/01. Une
+    note "automatique" vous dera rendue durant le week-end.
 
-  - 
-  - 
+  - Tps de génération de code directe: rendu le mardi 22/01 à 18h - une
+    correction sera fournie à la même heure. 
+	
+  - Dernier TP : rendu le dimanche 27 à 23h59.
+  
+  - Les deux dernières notes de TP vous seront fournies après l'examen.
+
+## Pondération des notes (indicative pour l'instant)
+  - CC1 (archi) 5%
+  - CC2 (grammaire) 5%
+  - TP évaluateur 15%
+  - TPs génération de code 15%+20%
   - Examen final 40 %
