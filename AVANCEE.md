@@ -12,7 +12,7 @@ _version intensive, janvier 2019_
  
   - Jeudi 10/01
      - :book: Cours, 8h00 -> 9h30: [cours2](lien cours 1) (LG)
-	 - :hammer: TD, 16h00 -> 17h30 [TD1 archi/lex](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+	 - :pencil2: TD, 16h00 -> 17h30 [TD1 archi/lex](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
        MM, NL)
    
   - Vendredi 11/01
@@ -28,7 +28,7 @@ _version intensive, janvier 2019_
   
   - Mardi 15/01
 	- :book: Cours, 8h00 -> 9h30:  [cours2](lien cours 2) (LG)
-    - :hammer: TD, 10h00 -> 11h30: [TD2 grammaires](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+    - :pencil2: TD, 10h00 -> 11h30: [TD2 grammaires](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
       MM, NL) 
 	- :hammer: TP libre après 16h
 	
@@ -42,7 +42,7 @@ _version intensive, janvier 2019_
 	- :hammer: TP libre après 16h
 	
   - Vendredi 18/01
-    - :hammer: TD, 14h00 -> 15h30: [TD3 génération de code](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+    - :pencil2: TD, 14h00 -> 15h30: [TD3 génération de code](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
       MM, NL) 
     - :hammer: TP, 16h -> 18h00: [TP4 démo, début codegen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
     
@@ -50,12 +50,12 @@ _version intensive, janvier 2019_
 ## Troisième semaine
 
   - Lundi 21/01
-    - :hammer: TD, 14h00 -> 15h30: [TD4 liveness](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+    - :pencil2: TD, 14h00 -> 15h30: [TD4 liveness](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
       MM, NL) 
 	- :hammer: TP libre après 16h
 	
   - Mardi 22/01
-	- :hammer: TD, 14h00 -> 15h30: [TD5 regalloc](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+	- :pencil2: TD, 14h00 -> 15h30: [TD5 regalloc](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
       MM, NL) 
 	- :hammer: TP, 14h00 -> 16h00:  [TP code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
 
