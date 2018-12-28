@@ -8,10 +8,10 @@ _version intensive, janvier 2019_
 ## Première semaine
 
   - Mercredi 9/01/2019
-     - :book: Cours, 16h00 -> 17h30: [cours1](lien cours 1) (LG)
+     - :book: Cours, 16h00 -> 17h30: [cours1](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf) (LG)
  
   - Jeudi 10/01
-     - :book: Cours, 8h00 -> 9h30: [cours2](lien cours 1) (LG)
+     - :book: Cours, 8h00 -> 9h30: [cours2](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf) (LG)
 	 - :pencil2: TD, 16h00 -> 17h30 [TD1 archi/lex](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
        MM, NL)
    
@@ -23,11 +23,11 @@ _version intensive, janvier 2019_
   - Lundi 14/01
 	- :mag_right: Contrôle continu (papier), 8h00 -> 8h20 archi (seul document
       autorisé: ISA de la machine) (LG)
-    - :book: Cours, 8h30 -> 10h00:  [cours2](lien cours 2) (LG)
+    - :book: Cours, 8h30 -> 10h00:  [cours3](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf) (LG)
     - :hammer: TP, 14h00 -> 16h00: [TP2 antlr](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
   
   - Mardi 15/01
-	- :book: Cours, 8h00 -> 9h30:  [cours2](lien cours 2) (LG)
+	- :book: Cours, 8h00 -> 9h30:  [cours4](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf) (LG)
     - :pencil2: TD, 10h00 -> 11h30: [TD2 grammaires](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
       MM, NL) 
 	- :hammer: TP libre après 16h
@@ -38,7 +38,7 @@ _version intensive, janvier 2019_
     - :hammer: TP, 15h -> 18h00: [TP3 frontend, évaluateur](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
 
   - Jeudi 17/01
-  	- :book: Cours, 10h00 -> 12h00:  [cours3](lien cours 3) (LG)
+  	- :book: Cours, 10h00 -> 12h00:  [cours5](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf) (LG)
 	- :hammer: TP libre après 16h
 	
   - Vendredi 18/01
@@ -57,11 +57,11 @@ _version intensive, janvier 2019_
   - Mardi 22/01
 	- :pencil2: TD, 14h00 -> 15h30: [TD5 regalloc](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
       MM, NL) 
-	- :hammer: TP, 14h00 -> 16h00:  [TP code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
+	- :hammer: TP, 14h00 -> 16h00:  [TP4/5 code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
 
   - Mercredi 23/01
 	- :hammer: TP libre le matin
-- 	- :hammer: TP, 14h00 -> 17h00:  [TP code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
+- 	- :hammer: TP, 14h00 -> 17h00:  [TP5 code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_TP_MIF08.pdf) (tous)
 
   - Jeudi 24/01
 	- Libre pour TP/Révisions
