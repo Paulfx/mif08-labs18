@@ -33,15 +33,17 @@ _version intensive, janvier 2019_
     - :hammer: TP, 14h00 -> 16h00: [TP2 antlr](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_tp2.pdf) (tous)
   
   - Mardi 15/01
-	- :book: Cours, 8h00 -> 9h30:  [cours4](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf) (LG)
+	- :book: Cours, 8h00 -> 9h30:
+      [cours4](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf)
+      (LG) génération de code 3 adresse, CFG.
     - :pencil2: TD, 10h00 -> 11h30: [TD2 grammaires](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, LM,
       MM, NL) 
 	- :hammer: TP libre après 16h
 	
   - Mercredi 16/01
-	- :mag_right: Contrôle continu (tp), 14h00 -> 14h30 une grammaire
+	- :mag_right: Contrôle continu (tp), 14h00 -> 14h30 (20 min de composition) une grammaire
       ANTLR (tous)
-    - :hammer: TP, 15h -> 18h00: [TP3 frontend, évaluateur](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_tp3.pdf) (tous)
+    - :hammer: TP, 14h45 -> 17h45: [TP3 frontend, évaluateur](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_tp3.pdf) (tous)
 
   - Jeudi 17/01
   	- :book: Cours, 10h00 -> 12h00:  [cours5](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_all_slides4p.pdf) (LG)
