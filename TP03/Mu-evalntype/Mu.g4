@@ -18,7 +18,6 @@ stat
     | if_stat
     | while_stat
     | log   
-    | OTHER {print("unknown char: {}".format($OTHER.text))}
     ;
 
 assignment: ID ASSIGN expr SCOL #assignStat;
@@ -123,6 +122,3 @@ SPACE
  : [ \t\r\n] -> skip
  ;
 
-OTHER
- : . 
- ;

@@ -5,6 +5,23 @@ from MuTypingVisitor import MuTypingVisitor, MuTypeError
 
 import argparse
 import antlr4
+from antlr4.error.ErrorListener import ErrorListener
+
+
+class CountErrorListener(ErrorListener):
+    """Count number of errors.
+
+    Parser provides getNumberOfSyntaxErrors(), but the Lexer
+    apparently doesn't provide an easy way to know if an error occured
+    after the fact. Do the counting ourserves with a listener.
+    """
+
+    def __init__(self):
+        super(CountErrorListener, self).__init__()
+        self.count = 0
+
+    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        self.count += 1
 
 
 enable_typing = True
@@ -20,9 +37,14 @@ def main():
     # lex and parse
     input_s = antlr4.FileStream(args.path, encoding='utf8')
     lexer = MuLexer(input_s)
+    counter = CountErrorListener()
+    lexer._listeners.append(counter)
     stream = antlr4.CommonTokenStream(lexer)
     parser = MuParser(stream)
+    parser._listeners.append(counter)
     tree = parser.prog()
+    if counter.count > 0:
+        exit(1)  # Syntax or lexicography errors occured, don't try to go further.
 
     # typing Visitor - This is given to you
     if enable_typing:
