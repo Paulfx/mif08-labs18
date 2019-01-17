@@ -21,10 +21,15 @@ class MuEvalVisitor(MuVisitor):
 
     def visitVarDecl(self, ctx):
         # Initialise all variables in self._memory (toto |-> None)
-        pass
+        vars_l = self.visit(ctx.id_l())
+        for var in vars_l:
+            self._memory[var] = None #TODO DEMANDER
+        return
 
     def visitIdList(self, ctx):
-        pass
+        listeID = self.visit(ctx.id_l())
+        name = ctx.ID().getText()
+        return listeID.append(name)
 
     def visitIdListBase(self, ctx):
         return [ctx.ID().getText()]
@@ -46,7 +51,11 @@ class MuEvalVisitor(MuVisitor):
         return ctx.getText() == "true"
 
     def visitIdAtom(self, ctx):
-        pass
+        name = ctx.ID().getText()
+        value = self._memory[name]
+        if value == None :
+            raise MuRuntimeError(name + " has no value yet!")
+        return value
 
     def visitStringAtom(self, ctx):
         return ctx.getText()[1:-1]
@@ -137,17 +146,25 @@ class MuEvalVisitor(MuVisitor):
         print(val)
 
     def visitAssignStat(self, ctx):
-        pass
+        name = ctx.ID().getText()
+        value = self.visit(ctx.expr())
+        self._memory[name] = value
+
 
     def visitCondBlock(self, ctx):
-        # expr bool, then stat-block
-        # exec the stat-block and return true if the cond evaluates to true
-        # else return False.
-        pass
+        cond = self.visit(ctx.expr())
+        if cond :
+            self.visit(ctx.stat_block())
+            return True
+        return False
 
     def visitIfStat(self, ctx):
-        pass
+        for cond in ctx.condition_block() :
+            if (self.visit(cond)) :
+                break
+        else :
+            self.visit(ctx.stat_block())
 
     def visitWhileStat(self, ctx):
-        pass
-
+        while self.visit(ctx.expr()) :
+            self.visit(ctx.stat_block())
