@@ -15,7 +15,7 @@ IMPLEM_DIR = HERE
 ALL_FILES = []
 # tests for typing AND evaluation
 # change here to also include bad_def tests.
-ALL_FILES += glob.glob(TEST_DIR + '/ex/test*.mu')
+ALL_FILES += glob.glob(TEST_DIR + '/ex/*.mu')
 ALL_FILES += glob.glob(TEST_DIR + '/ex-types/*.mu')
 
 
