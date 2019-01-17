@@ -6,6 +6,7 @@ from MuTypingVisitor import MuTypingVisitor, MuTypeError
 import argparse
 import antlr4
 from antlr4.error.ErrorListener import ErrorListener
+from antlr4.tree.Trees import Trees
 
 
 class CountErrorListener(ErrorListener):
