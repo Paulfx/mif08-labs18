@@ -23,7 +23,7 @@ class MuEvalVisitor(MuVisitor):
         # Initialise all variables in self._memory (toto |-> None)
         vars_l = self.visit(ctx.id_l())
         for var in vars_l:
-            self._memory[var] = None #TODO DEMANDER
+            self._memory[var] = None
         return
 
     def visitIdList(self, ctx):
