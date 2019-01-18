@@ -4,9 +4,10 @@ n=0;
 s=0;
 while n < 5 {
 	n=n+1;
-	s=s+n;
+	s=s+1;
 }
 log(s);
 
 # EXPECTED
-# 15
+# EXITCODE 0
+# 5

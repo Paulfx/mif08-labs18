@@ -6,6 +6,12 @@ DIR = $(shell basename $(PWD))
 
 TESTFILE?=ex/test00.mu
 
+COV?=false
+OPTPYTEST=
+ifeq ($(COV),true)
+OPTPYTEST=--cov=$(PWD)
+endif
+
 ifndef ANTLR4
 abort:
 	$(error variable ANTLR4 is not set)
@@ -23,7 +29,7 @@ run: $(MAINFILE).py main-deps
 
 # tests all files in ex/test*.mu
 tests: test_evaluator.py main-deps
-	TEST_EXTENSIONS=t python3 -m pytest -v --failed-first $< 
+	TEST_EXTENSIONS=t python3 -m pytest $(OPTPYTEST) -v --failed-first $< 
 
 
 tar: clean

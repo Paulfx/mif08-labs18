@@ -163,7 +163,10 @@ class MuEvalVisitor(MuVisitor):
             if (self.visit(cond)) :
                 break
         else :
-            self.visit(ctx.stat_block())
+            #Sortie sans break
+            if ctx.stat_block() :
+                #S'il y a un else
+                self.visit(ctx.stat_block())
 
     def visitWhileStat(self, ctx):
         while self.visit(ctx.expr()) :

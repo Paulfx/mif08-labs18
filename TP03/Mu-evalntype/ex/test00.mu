@@ -1,4 +1,5 @@
 log(42);
 
 # EXPECTED
+# EXITCODE 0
 # 42
