@@ -6,7 +6,12 @@ Laure Gonnord, Serge Guelton, Matthieu Moy, and al for CAP and MIF08
 
 Lafoix Paul: file MuEvalVisitor.py
 
-# Contents
+# Functionality
+
+Do the typing and evaluation of an input written in the Mu language.
+Uses antlr4 to generate a python Lexer/Parser, and the pattern Visitor to check the typing and to evaluate the input.
+
+# Usage
 
 ../ex contains example files.
 
