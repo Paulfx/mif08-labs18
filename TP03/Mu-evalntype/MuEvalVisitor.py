@@ -29,7 +29,8 @@ class MuEvalVisitor(MuVisitor):
     def visitIdList(self, ctx):
         listeID = self.visit(ctx.id_l())
         name = ctx.ID().getText()
-        return listeID.append(name)
+        listeID.append(name)
+        return listeID
 
     def visitIdListBase(self, ctx):
         return [ctx.ID().getText()]

@@ -1,7 +1,7 @@
 PACKAGE = Mu
 MAINFILE = Main
 #change with your own name:
-MYNAME = JohnDoe
+MYNAME = Paul_Lafoix
 DIR = $(shell basename $(PWD))
 
 TESTFILE?=ex/test00.mu
