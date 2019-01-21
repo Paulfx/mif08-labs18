@@ -191,7 +191,12 @@ class MuCodeGen3AVisitor(MuVisitor):
             print("and block is:")
             print(Trees.toStringTree(ctx.stat_block(), None, self._parser))
         end_if = self.ctx_stack[-1]  # get the label for the end!
-        raise NotImplementedError()
+
+        dr = self.visit(ctx.expr())
+        #If condition (in dr) is false jump to endif
+        self._prog.addInstructionCondJUMP(end_if, dr, Condition(MuParser.EQ), 0)
+        #Else condition is true
+        self.visit(ctx.stat_block())
 
     def visitIfStat(self, ctx):
         if self._debug:
@@ -199,7 +204,12 @@ class MuCodeGen3AVisitor(MuVisitor):
         # invent a new label, then push in the label stack
         if_ctx_end_if = self._prog.new_label("end_if")
         self.ctx_stack.append(if_ctx_end_if)
-        raise NotImplementedError()
+        
+        
+        for cond in ctx.condition_block():
+            self.visit(cond)
+
+
         # At the end, put the label and pop!
         self._prog.addLabel(if_ctx_end_if)
         popped = self.ctx_stack.pop()
