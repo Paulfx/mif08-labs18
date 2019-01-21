@@ -63,7 +63,7 @@ _version intensive, janvier 2019_
 	- :hammer: TP libre après 16h
 	
   - Mardi 22/01
-	- :pencil2: TD, 14h00 -> 15h30: [TD5 regalloc](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
+	- :pencil2: TD, 10h00 -> 11h30 (sauf TD A): [TD5 regalloc](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/cahier_exos_MIF08.pdf) (LG, SB,
       MM, NL) 
 	- :hammer: TP, 14h00 -> 16h00:  [TP4/5 code gen](http://laure.gonnord.org/pro/teaching/MIF08_Compil1819/mif08_tp5.pdf) (tous)
 
