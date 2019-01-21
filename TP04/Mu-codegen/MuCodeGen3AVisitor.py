@@ -55,19 +55,22 @@ class MuCodeGen3AVisitor(MuVisitor):
         return self.visit(ctx.expr())
 
     def visitNumberAtom(self, ctx):
-        s = ctx.getText()
+        return self.processNumber(ctx.getText())
+
+    def visitBooleanAtom(self, ctx):
+        # true is 1 false is 0
+        return self.processNumber(ctx.getText() == "true")
+
+    # Not generated
+    def processNumber(self, n):
         try:
-            val = int(s)
+            val = int(n)
             # this is valid for val beetween -2^15 and 2^15 -1
             dr = self._prog.new_tmp()
             self._prog.addInstructionLETI(dr, val)
             return dr
         except ValueError:
             raise NotImplementedError("float value")
-
-    def visitBooleanAtom(self, ctx):
-        # true is 1 false is 0
-        raise NotImplementedError()
 
     def visitIdAtom(self, ctx):
         try:
@@ -83,28 +86,56 @@ class MuCodeGen3AVisitor(MuVisitor):
     # now visit expressions : TODO
 
     def visitAtomExpr(self, ctx):
+        # An atom can be a number (int only)
+        # a boolean or an id (string not implemented) 
         return self.visit(ctx.atom())
 
     def visitAdditiveExpr(self, ctx):
-        raise NotImplementedError()
+        t1 = self.visit(ctx.expr()[0])
+        t2 = self.visit(ctx.expr()[1])
+        dr = self._prog.new_tmp()
+        if ctx.myop.type == MuParser.PLUS:
+            self._prog.addInstructionADD(dr, t1, t2)
+        elif ctx.myop.type == MuParser.MINUS :
+            self._prog.addInstructionSUB(dr, t1, t2)
+        else :
+            raise Exception("Unknown additive operator '%s'" % ctx.myop)
+        return dr
 
     def visitOrExpr(self, ctx):
-        raise NotImplementedError()
+        dr = _prog.new_tmp()
+        tmpl = self.visit(ctx.expr()[0])
+        tmpr = self.visit(ctx.expr()[1])
+        self._prog.addInstructionOR(dr, tmpl, tmpr)
+        return dr
 
     def visitAndExpr(self, ctx):
-        raise NotImplementedError()
+        dr = _prog.new_tmp()
+        tmpl = self.visit(ctx.expr()[0])
+        tmpr = self.visit(ctx.expr()[1])
+        self._prog.addInstructionAND(dr, tmpl, tmpr)
+        return dr
 
     def visitEqualityExpr(self, ctx):
+        # Rule equalityExpr works like relationalExpr (condition created with myop)
         return self.visitRelationalExpr(ctx)
 
     def visitRelationalExpr(self, ctx):
         if self._debug:
             print("relational expression:")
             print(Trees.toStringTree(ctx, None, self._parser))
+        # get the tmp register that store the value of the evaluation of exprs
         tmpl = self.visit(ctx.expr(0))
         tmpr = self.visit(ctx.expr(1))
+        # Generate a new tmp register to store result
+        dr = self._prog.new_tmp()
+        # Create the condition for the condjump
         c = Condition(ctx.myop.type)
-        raise NotImplementedError()
+        endrel = self._prog.new_label("endrel")
+        self._prog.addInstructionCondJUMP(endrel, tmpl, c, tmpr)
+        self._prog.addInstructionLETI(dr,1)
+        self._prog.addLabel(endrel)
+        return dr
 
     def visitMultiplicativeExpr(self, ctx):
         raise NotImplementedError("multexpr")
