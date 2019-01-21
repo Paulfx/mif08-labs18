@@ -23,7 +23,7 @@ Unit test infrastructure for testing code generation:
 3) for different allocation algorithms
 """
 
-onlyNaive = False  # change here to only test wrt the naive allocator.
+onlyNaive = True  # change here to only test wrt the naive allocator.
 withEval = True  # change here if your evaluator is too buggy.
 
 # change here for step2, and your own test files

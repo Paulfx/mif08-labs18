@@ -132,8 +132,12 @@ class MuCodeGen3AVisitor(MuVisitor):
         # Create the condition for the condjump
         c = Condition(ctx.myop.type)
         endrel = self._prog.new_label("endrel")
-        self._prog.addInstructionCondJUMP(endrel, tmpl, c, tmpr)
         self._prog.addInstructionLETI(dr,1)
+        #If tmpl is COND tmpr
+        #Then don't change value of dr (already true=1) -> jump to end
+        self._prog.addInstructionCondJUMP(endrel, tmpl, c, tmpr)
+        #else store false(0) in dr
+        self._prog.addInstructionLETI(dr,0)
         self._prog.addLabel(endrel)
         return dr
 
@@ -142,10 +146,24 @@ class MuCodeGen3AVisitor(MuVisitor):
 
     def visitNotExpr(self, ctx):
         reg = self.visit(ctx.expr())
-        raise NotImplementedError()
+        dr = self._prog.new_tmp()
+        endnot = self._prog.new_label("endnot")
+        #Init dr at false
+        self._prog.addInstructionLETI(dr,0)
+        #If value stored in reg is not false
+        #Let dr at false(0) and return dr
+        self._prog.addInstructionCondJUMP(endnot, reg, Condition(MuParser.NEQ), dr)
+        #else return true
+        self._prog.addInstructionLETI(dr,1)
+        self._prog.addLabel(endnot)
+        return dr
 
     def visitUnaryMinusExpr(self, ctx):
-        raise NotImplementedError("unaryminusexpr")
+        reg = self.visit(ctx.expr())
+        dr = self._prog.new_tmp()
+        #Substract value of reg and 0 and store in dr
+        self._prog.addInstructionSUB(dr,0,reg)
+        return dr
 
 # statements
     def visitProgRule(self, ctx):
