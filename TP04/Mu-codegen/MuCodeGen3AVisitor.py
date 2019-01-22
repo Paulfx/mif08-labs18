@@ -189,7 +189,9 @@ class MuCodeGen3AVisitor(MuVisitor):
         reg = self.visit(ctx.expr())
         dr = self._prog.new_tmp()
         #Substract value of reg and 0 and store in dr
-        self._prog.addInstructionSUB(dr,0,reg)
+        d0 = self._prog.new_tmp()
+        self._prog.addInstructionLETI(d0,0)
+        self._prog.addInstructionSUB(dr,d0,reg)
         return dr
 
 # statements

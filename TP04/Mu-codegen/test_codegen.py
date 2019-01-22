@@ -28,7 +28,7 @@ withEval = True  # change here if your evaluator is too buggy.
 
 # change here for step2, and your own test files
 #ALL_FILES = glob.glob('tests/*/*.mu')
-ALL_FILES = glob.glob('tests/mine/*mult*.mu')
+ALL_FILES = glob.glob('tests/*/*.mu')
 
 
 HERE = os.path.dirname(os.path.realpath(__file__))

@@ -16,7 +16,6 @@ def replace_reg(old_i):
     for arg in old_args:
         if isinstance(arg, Temporary):
             arg = arg.get_alloced_loc()
-            print(arg)
         args.append(arg)
     return [Instru3A(ins, args=args)]
 
@@ -40,8 +39,6 @@ def replace_mem(old_i):
                 #So we have to load it from memory
                 #And if index is 0 (first arg) but with print,
                 # then we also need to read this arg
-
-
                 reg = Register(nbTempRead)
                 nbTempRead = nbTempRead+1
 
