@@ -145,7 +145,7 @@ class MuCodeGen3AVisitor(MuVisitor):
         reg = self.visit(ctx.expr())
         dr = self._prog.new_tmp()
         # there is no NOT instruction :-(
-        labelneg, labelend = self._prog.newlabelCond()
+        labelneg, labelend = self._prog.new_label_cond()
         self._prog.addInstructionCondJUMP(labelneg, reg,
                                           Condition("neq"), 1)
         self._prog.addInstructionLETI(dr, 0)
