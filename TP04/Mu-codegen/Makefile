@@ -7,7 +7,7 @@ OBJ=$(TESTFILE:%.mu=%.obj)
 TRACE=$(TESTFILE:%.mu=%.trace)
 SIMU = ../../saruman/emu/emu
 ASSEMBLER=../../../saruman/asm2017/asm.py
-MYNAME=AlanTuring
+MYNAME=Lafoix_Paul
 # To change the allocation strategy, use e.g.:
 # make ALLOC=all_in_mem run
 ALLOC=none
@@ -46,6 +46,7 @@ clean:
 	rm -f testsdataflow/*.dot.pdf testsdataflow/*.obj
 	rm -f tests/step1/*.s tests/step1/*.bin
 	rm -f tests/step2/*.s tests/step2/*.bin
+	rm -f tests/mine/*.s tests/mine/*.bin
 
 
 ../../TP03/Mu-evalntype/MuParser.py:

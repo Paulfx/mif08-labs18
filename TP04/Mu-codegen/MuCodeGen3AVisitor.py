@@ -142,7 +142,34 @@ class MuCodeGen3AVisitor(MuVisitor):
         return dr
 
     def visitMultiplicativeExpr(self, ctx):
-        raise NotImplementedError("multexpr")
+
+        #case mult
+        if ctx.myop.type == MuParser.MULT:
+            #Works only for positive expr
+
+            t1 = self.visit(ctx.expr()[0])
+            t2 = self.visit(ctx.expr()[1])
+
+            endmult = self._prog.new_label("endmult")
+            beginmult = self._prog.new_label("beginmult")
+        
+            dr = self._prog.new_tmp() #the result
+            di = self._prog.new_tmp() #the accumulator
+
+            #init at 0
+            self._prog.addInstructionLETI(di,0)    
+            self._prog.addLabel(beginmult)
+            # if we added t2 times t1, we stop
+            self._prog.addInstructionCondJUMP(endmult, di, Condition(MuParser.EQ),t2)
+            # else we add t1 to result and increment di, and redo
+            self._prog.addInstructionADD(dr,dr,t1)
+            self._prog.addInstructionADD(di,di,1)
+            self._prog.addInstructionJUMP(beginmult)
+            self._prog.addLabel(endmult)
+
+            return dr
+        else:
+            raise NotImplementedError("multexpr with div or mod")
 
     def visitNotExpr(self, ctx):
         reg = self.visit(ctx.expr())
@@ -192,11 +219,15 @@ class MuCodeGen3AVisitor(MuVisitor):
             print(Trees.toStringTree(ctx.stat_block(), None, self._parser))
         end_if = self.ctx_stack[-1]  # get the label for the end!
 
+        end_cond = self._prog.new_label("end_cond")
+
         dr = self.visit(ctx.expr())
         #If condition (in dr) is false jump to endif
-        self._prog.addInstructionCondJUMP(end_if, dr, Condition(MuParser.EQ), 0)
+        self._prog.addInstructionCondJUMP(end_cond, dr, Condition(MuParser.EQ), 0)
         #Else condition is true
         self.visit(ctx.stat_block())
+        self._prog.addInstructionJUMP(end_if)
+        self._prog.addLabel(end_cond)
 
     def visitIfStat(self, ctx):
         if self._debug:
@@ -204,12 +235,12 @@ class MuCodeGen3AVisitor(MuVisitor):
         # invent a new label, then push in the label stack
         if_ctx_end_if = self._prog.new_label("end_if")
         self.ctx_stack.append(if_ctx_end_if)
-        
-        
+        #On génère le code pour chaque condition block
         for cond in ctx.condition_block():
             self.visit(cond)
-
-
+        #Else :
+        if (ctx.stat_block()):
+            self.visit(ctx.stat_block())
         # At the end, put the label and pop!
         self._prog.addLabel(if_ctx_end_if)
         popped = self.ctx_stack.pop()
@@ -221,7 +252,17 @@ class MuCodeGen3AVisitor(MuVisitor):
             print(Trees.toStringTree(ctx.expr(), None, self._parser))
             print("and block is:")
             print(Trees.toStringTree(ctx.stat_block(), None, self._parser))
-        raise NotImplementedError()
+        
+        test = self._prog.new_label("test")
+        end_while = self._prog.new_label("end_while")
+        self._prog.addLabel(test)
+        dr = self.visit(ctx.expr())
+        #If expr is false, jump to end
+        self._prog.addInstructionCondJUMP(end_while, dr, Condition(MuParser.EQ), 0)
+        #else execute code
+        self.visit(ctx.stat_block())
+        self._prog.addInstructionJUMP(test)
+        self._prog.addLabel(end_while)
 
     def visitLogStat(self, ctx):
         expr_loc = self.visit(ctx.expr())
