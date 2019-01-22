@@ -30,7 +30,7 @@ def interfere(t1, t2, mapout, defined):
                 (t2 in mapout[key] and t1 in defined[key])):
             return True
     return False
-    return True # TODO (smart allocation) !
+
 
 
 class SARUMANProg:
@@ -169,9 +169,12 @@ class SARUMANProg:
     def addInstructionJUMP(self, label):
         assert isinstance(label, Label)
         i = Instru3A("jump", label)
-        # TODO: properly build the CFG: don't chain with next
-        # TODO: instruction to add, but with the target of the jump.
+
+
         self.add_instruction(i)
+        # add in list but do not link with the following node
+        self.add_instruction(i, linkwithsucc=False)
+        self.add_edge(i, label)
         return i
 
     # Useful meta instruction for conditional jump
@@ -180,9 +183,10 @@ class SARUMANProg:
         assert isinstance(c, Condition)
         ins = Instru3A("cond_jump", args=[label, op1, c, op2])
         # TODO ADD GEN KILL INIT IF REQUIRED
-        # TODO: properly build the CFG: chain with both the next
-        # TODO: instruction to be added and with the target of the jump.
+
+
         self.add_instruction(ins)
+        self.add_edge(ins, label)
         return ins
 
     def addInstructionADD(self, dr, sr1, sr2orimm7):
