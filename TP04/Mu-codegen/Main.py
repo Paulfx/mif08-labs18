@@ -7,7 +7,7 @@ Usage:
 """
 from MuLexer import MuLexer
 from MuParser import MuParser
-from MuCodeGen3AVisitor import MuCodeGen3AVisitor
+from MuCodeGen3AVisitor_correct import MuCodeGen3AVisitor
 from ExpandJump import replace_all_meta
 
 import argparse
@@ -71,7 +71,7 @@ def main(inputname, reg_alloc, stdout=False, output_name=None):
         prog.alloc_to_mem()
         comment = "all-in-memory allocation"
     elif reg_alloc == "smart":
-        prog.do_smart_alloc(basename)
+        prog.do_smart_alloc(basename, True)
         comment = "smart allocation with graph coloring"
     elif reg_alloc == "none":
         comment = "non executable 3-Address instructions"

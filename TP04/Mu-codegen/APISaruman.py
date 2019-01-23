@@ -292,8 +292,8 @@ class SARUMANProg:
 
         # TODO: Move the print&return statements below down as you progress
         # TODO: in the lab. They must be removed from the final version.
-        print("do_smart_alloc: stopping here for now")
-        return
+        #print("do_smart_alloc: stopping here for now")
+        #return
 
         # dataflow
         if debug:
@@ -310,6 +310,9 @@ class SARUMANProg:
             print("printing the conflict graph")
             igraph.print_dot(basename + "_conflicts.dot")
 
+
+        return 
+        
         # Smart Alloc via graph coloring
         self.smart_alloc(debug, basename + "_colored.dot")
 
