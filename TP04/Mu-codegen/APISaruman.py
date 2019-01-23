@@ -169,9 +169,6 @@ class SARUMANProg:
     def addInstructionJUMP(self, label):
         assert isinstance(label, Label)
         i = Instru3A("jump", label)
-
-
-        self.add_instruction(i)
         # add in list but do not link with the following node
         self.add_instruction(i, linkwithsucc=False)
         self.add_edge(i, label)
