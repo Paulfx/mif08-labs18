@@ -184,6 +184,10 @@ class SARUMANProg:
         ins = Instru3A("cond_jump", args=[label, op1, c, op2])
         # TODO ADD GEN KILL INIT IF REQUIRED
 
+        if isinstance(op1, Temporary):
+            ins._gen.add(op1)
+        if isinstance(op2, Temporary):
+            ins._gen.add(op2)
 
         self.add_instruction(ins)
         self.add_edge(ins, label)
@@ -196,6 +200,9 @@ class SARUMANProg:
             ins = Instru3A("add3", dr, sr1, sr2orimm7)
         # Tip : at some point you should use isinstance(..., Temporary)
         # TODO ADD GEN KILL INIT IF REQUIRED
+
+        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
+
         self.add_instruction(ins)
 
     def addInstructionSUB(self, dr, sr1, sr2orimm7):
@@ -203,28 +210,54 @@ class SARUMANProg:
             ins = Instru3A("sub3i", dr, sr1, sr2orimm7)
         else:
             ins = Instru3A("sub3", dr, sr1, sr2orimm7)
-        # TODO ADD GEN KILL INIT IF REQUIRED
+        
+        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
+
         self.add_instruction(ins)
 
     def addInstructionAND(self, dr, sr1, sr2orimm7):
         ins = Instru3A("and3", dr, sr1, sr2orimm7)
         # TODO ADD GEN KILL INIT IF REQUIRED
+        
+        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
+
         self.add_instruction(ins)
 
     def addInstructionOR(self, dr, sr1, sr2orimm7):
         ins = Instru3A("or3", dr, sr1, sr2orimm7)
         # TODO ADD GEN KILL INIT IF REQUIRED
+        
+        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
+
         self.add_instruction(ins)
+
+
+
+    # FONCTION DEF
+
+    def addDrSr1Sr2Imm(self, ins, dr, sr1, sr2orimm7):
+        ins._kill.add(dr)
+        ins._gen.add(sr1)
+        if isinstance(sr2orimm7, Temporary):
+            ins_gen.add(sr2orimm7)
+
+
 
     # Copy values (immediate or in register)
     def addInstructionLETI(self, dr, imm7):
         ins = Instru3A("leti", dr, imm7)
         # TODO ADD GEN KILL INIT IF REQUIRED
+
+        ins._kill.add(dr)
+
         self.add_instruction(ins)
 
     def addInstructionLET(self, dr, sr):
         ins = Instru3A("let", dr, sr)
-        # TODO ADD GEN KILL INIT IF REQUIRED
+        
+        ins._kill.add(dr)
+        ins._gen.add(sr)
+
         self.add_instruction(ins)
 
     def addInstructionRMEM(self, dr, sr):
@@ -292,8 +325,8 @@ class SARUMANProg:
 
         # TODO: Move the print&return statements below down as you progress
         # TODO: in the lab. They must be removed from the final version.
-        print("do_smart_alloc: stopping here for now")
-        return
+        #print("do_smart_alloc: stopping here for now")
+        #return
 
         # dataflow
         if debug:

@@ -103,14 +103,14 @@ class MuCodeGen3AVisitor(MuVisitor):
         return dr
 
     def visitOrExpr(self, ctx):
-        dr = _prog.new_tmp()
+        dr = self._prog.new_tmp()
         tmpl = self.visit(ctx.expr()[0])
         tmpr = self.visit(ctx.expr()[1])
         self._prog.addInstructionOR(dr, tmpl, tmpr)
         return dr
 
     def visitAndExpr(self, ctx):
-        dr = _prog.new_tmp()
+        dr = self._prog.new_tmp()
         tmpl = self.visit(ctx.expr()[0])
         tmpr = self.visit(ctx.expr()[1])
         self._prog.addInstructionAND(dr, tmpl, tmpr)
