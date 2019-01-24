@@ -33,7 +33,7 @@ withEval = True  # change here if your evaluator is too buggy.
 print("HERE=", HERE)
 
 # change here for your own test files
-ALL_FILES = glob.glob('tests/*.mu')
+ALL_FILES = glob.glob('tests/*/*.mu')
 
 HERE = os.path.dirname(os.path.realpath(__file__))
 
