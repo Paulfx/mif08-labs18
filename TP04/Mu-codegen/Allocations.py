@@ -40,31 +40,6 @@ def replace_mem(old_i):
             if readingTemp:
                 nbTempRead += 1
 
-
-
-            """
-            if index > 0 or "print" in ins:
-                #We need to access to this arg
-                #So we have to load it from memory
-                #And if index is 0 (first arg) but with print,
-                # then we also need to read this arg
-                reg = Register(nbTempRead)
-                nbTempRead = nbTempRead+1
-
-                before.append(Instru3A('getctr', SP, Indirect(reg)))
-                before.append(Instru3A('add', reg, reg, arg.get_offset() * 16))
-                before.append(Instru3A('setctr', A0, Indirect(reg)))
-                before.append(Instru3A('readse', A0, 16, reg))
-
-                arg = reg
-            elif index == 0:
-                #We need to write in this arg
-                after.append(Instru3A('getctr', SP, Indirect(R0)))
-                after.append(Instru3A('add', R0, R0, arg.get_offset() * 16))
-                after.append(Instru3A('setctr', A0, Indirect(R0)))
-                after.append(Instru3A('write', A0, 16, R1))
-                arg = R1
-            """
         else:
             reg = arg
 
@@ -113,6 +88,7 @@ def replace_smart(old_i):
     nbTempRead = 0
 
     for (index, arg) in enumerate(old_args):
+        newArg = arg
         if isinstance(arg, Temporary):
 
             #Register of offset
@@ -125,17 +101,11 @@ def replace_smart(old_i):
                     nbTempRead += 1
                 before += bf
                 after += aft
-                args.append(newArg)
-
             else:
                 assert isinstance(regOrOffset, Register)
                 newArg = regOrOffset
-        else:
-            newArg = arg
 
         args.append(newArg)
 
-    # TODO: compute before,after,args. This is a superset of what replace_mem does.
-    # and now return the new list!
     i = Instru3A(ins, args=args)  # change argument list into args
     return before + [i] + after

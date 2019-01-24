@@ -24,6 +24,8 @@ MIF08, CAP, CodeGeneration, SARUMAN API
 
 def interfere(t1, t2, mapout, defined):
     """Interfere function: True if t1 and t2 are in conflit."""
+    if t1 == t2 :
+        return False
     for key in mapout:
         if ((t1 in mapout[key] and t2 in mapout[key]) or
                 (t1 in mapout[key] and t2 in defined[key]) or
@@ -212,8 +214,6 @@ class SARUMANProg:
         ins = Instru3A("or3", dr, sr1, sr2orimm7)
         self.addGenKillSr2orimm(ins,dr,sr1,sr2orimm7)
         self.add_instruction(ins)
-
-
 
     # Copy values (immediate or in register)
     def addInstructionLETI(self, dr, imm7):

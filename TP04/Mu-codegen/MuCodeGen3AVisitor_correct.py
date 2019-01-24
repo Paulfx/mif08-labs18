@@ -139,7 +139,33 @@ class MuCodeGen3AVisitor(MuVisitor):
 
 
     def visitMultiplicativeExpr(self, ctx):
-        raise NotImplementedError("multexpr")
+        #case mult
+        if ctx.myop.type == MuParser.MULT:
+            #Works only for positive expr
+
+            t1 = self.visit(ctx.expr()[0])
+            t2 = self.visit(ctx.expr()[1])
+
+            endmult = self._prog.new_label("endmult")
+            beginmult = self._prog.new_label("beginmult")
+        
+            dr = self._prog.new_tmp() #the result
+            di = self._prog.new_tmp() #the accumulator
+
+            #init at 0
+            self._prog.addInstructionLETI(di,0)    
+            self._prog.addLabel(beginmult)
+            # if we added t2 times t1, we stop
+            self._prog.addInstructionCondJUMP(endmult, di, Condition(MuParser.EQ),t2)
+            # else we add t1 to result and increment di, and redo
+            self._prog.addInstructionADD(dr,dr,t1)
+            self._prog.addInstructionADD(di,di,1)
+            self._prog.addInstructionJUMP(beginmult)
+            self._prog.addLabel(endmult)
+
+            return dr
+        else:
+            raise NotImplementedError("multexpr with div or mod")
 
     def visitNotExpr(self, ctx):
         reg = self.visit(ctx.expr())
