@@ -71,7 +71,7 @@ def main(inputname, reg_alloc, stdout=False, output_name=None):
         prog.alloc_to_mem()
         comment = "all-in-memory allocation"
     elif reg_alloc == "smart":
-        prog.do_smart_alloc(basename, True)
+        prog.do_smart_alloc(basename, False)
         comment = "smart allocation with graph coloring"
     elif reg_alloc == "none":
         comment = "non executable 3-Address instructions"

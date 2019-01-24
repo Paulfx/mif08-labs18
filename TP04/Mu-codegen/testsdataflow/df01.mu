@@ -3,3 +3,5 @@ n=6;
 u=12;
 v=n+u;
 log(v);
+# EXPECTED
+# 18

@@ -169,9 +169,6 @@ class SARUMANProg:
     def addInstructionJUMP(self, label):
         assert isinstance(label, Label)
         i = Instru3A("jump", label)
-
-
-        self.add_instruction(i)
         # add in list but do not link with the following node
         self.add_instruction(i, linkwithsucc=False)
         self.add_edge(i, label)
@@ -182,13 +179,10 @@ class SARUMANProg:
         assert isinstance(label, Label)
         assert isinstance(c, Condition)
         ins = Instru3A("cond_jump", args=[label, op1, c, op2])
-        # TODO ADD GEN KILL INIT IF REQUIRED
-
-        if isinstance(op1, Temporary):
+        if isinstance(op1,Temporary):
             ins._gen.add(op1)
-        if isinstance(op2, Temporary):
+        if isinstance(op2,Temporary):
             ins._gen.add(op2)
-
         self.add_instruction(ins)
         self.add_edge(ins, label)
         return ins
@@ -198,11 +192,7 @@ class SARUMANProg:
             ins = Instru3A("add3i", dr, sr1, sr2orimm7)
         else:
             ins = Instru3A("add3", dr, sr1, sr2orimm7)
-        # Tip : at some point you should use isinstance(..., Temporary)
-        # TODO ADD GEN KILL INIT IF REQUIRED
-
-        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
-
+        self.addGenKillSr2orimm(ins,dr,sr1,sr2orimm7)
         self.add_instruction(ins)
 
     def addInstructionSUB(self, dr, sr1, sr2orimm7):
@@ -210,54 +200,30 @@ class SARUMANProg:
             ins = Instru3A("sub3i", dr, sr1, sr2orimm7)
         else:
             ins = Instru3A("sub3", dr, sr1, sr2orimm7)
-        
-        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
-
+        self.addGenKillSr2orimm(ins,dr,sr1,sr2orimm7)
         self.add_instruction(ins)
 
     def addInstructionAND(self, dr, sr1, sr2orimm7):
         ins = Instru3A("and3", dr, sr1, sr2orimm7)
-        # TODO ADD GEN KILL INIT IF REQUIRED
-        
-        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
-
+        self.addGenKillSr2orimm(ins,dr,sr1,sr2orimm7)
         self.add_instruction(ins)
 
     def addInstructionOR(self, dr, sr1, sr2orimm7):
         ins = Instru3A("or3", dr, sr1, sr2orimm7)
-        # TODO ADD GEN KILL INIT IF REQUIRED
-        
-        addDrSr1Sr2Imm(ins,dr,sr1,sr2orimm7)
-
+        self.addGenKillSr2orimm(ins,dr,sr1,sr2orimm7)
         self.add_instruction(ins)
-
-
-
-    # FONCTION DEF
-
-    def addDrSr1Sr2Imm(self, ins, dr, sr1, sr2orimm7):
-        ins._kill.add(dr)
-        ins._gen.add(sr1)
-        if isinstance(sr2orimm7, Temporary):
-            ins_gen.add(sr2orimm7)
 
 
 
     # Copy values (immediate or in register)
     def addInstructionLETI(self, dr, imm7):
         ins = Instru3A("leti", dr, imm7)
-        # TODO ADD GEN KILL INIT IF REQUIRED
-
         ins._kill.add(dr)
-
         self.add_instruction(ins)
 
     def addInstructionLET(self, dr, sr):
         ins = Instru3A("let", dr, sr)
-        
-        ins._kill.add(dr)
-        ins._gen.add(sr)
-
+        self.addGenKillSr2orimm(ins,dr,sr)
         self.add_instruction(ins)
 
     def addInstructionRMEM(self, dr, sr):
@@ -277,6 +243,14 @@ class SARUMANProg:
         ins = Instru3A("wmem", dr, sr)
         # TODO ADD GEN KILL INIT IF REQUIRED
         self.add_instruction(ins)
+
+    def addGenKillSr2orimm(self, ins, dr, sr, sr2orimm7=None):
+        ins._kill.add(dr)
+        ins._gen.add(sr)
+        if isinstance(sr2orimm7, Temporary):
+            ins._gen.add(sr2orimm7)
+        #Remove occurence of kill that we found in gen
+        ins._kill = ins._kill.difference(ins._gen)
 
     # Allocation functions
     def naive_alloc(self):
@@ -342,7 +316,7 @@ class SARUMANProg:
         if debug:
             print("printing the conflict graph")
             igraph.print_dot(basename + "_conflicts.dot")
-
+        
         # Smart Alloc via graph coloring
         self.smart_alloc(debug, basename + "_colored.dot")
 
@@ -357,7 +331,13 @@ class SARUMANProg:
             raise Exception("hum, the interference graph seems to be empty")
         # Temporary -> Operand (register or offset) dictionary,
         # specifying where a given Temporary should be allocated:
-        alloc_dict = {}
+        alloc_dict = {temp: None for temp in self._pool._all_temps}
+
+        def replaceValueDictOfTemporary(key_str, value):
+            for key in alloc_dict.keys():
+                if str(key) == key_str:
+                    alloc_dict[key] = value
+
         # TODO :  color the graph with appropriate nb of colors,
         # and get back the (partial) coloring (see Libgraphes.py)
         # if appropriate, relaunch the coloring for spilled variables.
@@ -366,7 +346,25 @@ class SARUMANProg:
         # Be careful, the registers names in the graph are now strings,
         # at some point there should be an explicit
         # str_temp = str(temp) conversion before accessing the associated color.
-        # TODO !
+        
+        coloring, is_total, colored_nodes = self._igraph.color(6, [])
+
+        for node in colored_nodes:
+            #alloc_dict[node] = GP_REGS[int(coloring[node])]
+            replaceValueDictOfTemporary(node, GP_REGS[int(coloring[node])])
+
+        if not is_total:
+            nbNotColored = len(self._igraph.vertices()) - len(colored_nodes)
+            # We recolor only not colored nodes
+            coloring, is_total, colored_nodes = self._igraph.color(nbNotColored, colored_nodes)
+            assert is_total is True
+            assert nbNotColored == len(colored_nodes)
+            # We add them as offset
+            for node in colored_nodes:
+                #alloc_dict[node] = Offset(SP, int(coloring[node]))
+                replaceValueDictOfTemporary(node, Offset(SP, int(coloring[node])))
+
+
         self._pool.set_reg_allocation(alloc_dict)
         self.iter_instructions(replace_smart)
 

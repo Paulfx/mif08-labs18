@@ -42,7 +42,7 @@ $(SIMU):
 clean:
 	rm -rf *~ $(PACKAGE)Lexer* $(PACKAGE)Parser* *.pyc *.tokens  __pycache* .cache/ *.interp
 	rm -f tests/*.s tests/*.dot tests/*.dot.pdf tests/*.obj
-	rm -f testsdataflow/*.s testsdataflow/*.dot
+	rm -f testsdataflow/*.s testsdataflow/*.dot testsdataflow/*.bin
 	rm -f testsdataflow/*.dot.pdf testsdataflow/*.obj
 	rm -f tests/step1/*.s tests/step1/*.bin
 	rm -f tests/step2/*.s tests/step2/*.bin
